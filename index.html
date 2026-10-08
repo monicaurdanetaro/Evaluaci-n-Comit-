@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portal de Evaluación · Comité Ejecutivo 2025-2026 · Farmatodo</title>
+<style>
+:root{
+  --navy:#001e62; --blue:#418fde; --blue-50:#edf4fc; --blue-100:#d9e9f8; --blue-600:#2e73b8;
+  --teal:#00a499; --green:#15905f; --green-tint:#e6f8f0; --amber:#b97708; --amber-tint:#fef4e2;
+  --red:#b72c2c; --red-tint:#fdecec;
+  --g0:#ffffff; --g25:#fafbfc; --g50:#f5f7fa; --g100:#eef0f4; --g200:#dce0e6; --g300:#c3c9d2;
+  --g400:#9aa2ae; --g500:#767f8c; --g700:#3f4650;
+  --page:var(--g50); --card:var(--g0); --sunken:var(--g100);
+  --text:var(--g700); --strong:var(--navy); --muted:var(--g500); --faint:var(--g400);
+  --line:var(--g200); --line-strong:var(--g300);
+  --font:"Helvetica Neue",Helvetica,Arimo,Arial,sans-serif;
+  --r:8px; --r-lg:12px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --page:#12161c; --card:#1a1f27; --sunken:#232933;
+    --text:#d7dce4; --strong:#cfe0f7; --muted:#98a2b2; --faint:#6f7988;
+    --line:#2c333d; --line-strong:#3a424e; --blue-50:#152232; --blue-100:#1b2c40;
+    --green-tint:#14291f; --amber-tint:#2a2314; --red-tint:#2b1a1a;
+  }
+}
+:root[data-theme="dark"]{
+  --page:#12161c; --card:#1a1f27; --sunken:#232933;
+  --text:#d7dce4; --strong:#cfe0f7; --muted:#98a2b2; --faint:#6f7988;
+  --line:#2c333d; --line-strong:#3a424e; --blue-50:#152232; --blue-100:#1b2c40;
+  --green-tint:#14291f; --amber-tint:#2a2314; --red-tint:#2b1a1a;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;font:400 15px/1.6 var(--font);color:var(--text);background:var(--page)}
+img{max-width:100%}
+h1,h2,h3{color:var(--strong);margin:0;font-weight:700;letter-spacing:-.01em}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px 80px}
+
+/* ---- encabezado ---- */
+header.top{border-bottom:1px solid var(--line);background:var(--card)}
+.top-in{max-width:1180px;margin:0 auto;padding:22px 20px 18px}
+.eyebrow{font:700 11px/1.4 var(--font);letter-spacing:.14em;text-transform:uppercase;color:var(--blue-600)}
+h1{font-size:25px;margin:6px 0 4px}
+.sub{color:var(--muted);font-size:13.5px}
+.guia{margin-top:16px;border:1px solid var(--line);border-radius:var(--r);background:var(--card);
+  padding:12px 16px;max-width:880px}
+.guia summary{font:700 12px/1.4 var(--font);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--blue-600);cursor:pointer}
+.guia ol{margin:10px 0 2px;padding-left:22px;font-size:13.5px;line-height:1.65;color:var(--text)}
+.guia li{margin-bottom:4px}
+.guia b{color:var(--strong)}
+.barra{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:16px}
+.notabox{margin-top:10px}
+.notabox textarea{min-height:62px;font-size:13px;background:var(--amber-tint);border-color:#e2c58a}
+.notabox .nl{font:700 10.5px/1.4 var(--font);letter-spacing:.09em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:5px}
+.notebtn.tiene{color:var(--amber);font-weight:700}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--amber);flex:0 0 auto}
+
+/* ---- usuario y sincronización ---- */
+.toprow{display:flex;gap:18px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.userbox{display:flex;flex-direction:column;align-items:flex-end;gap:9px;margin-left:auto}
+.uname{font:700 14px/1.3 var(--font);color:var(--strong);text-align:right}
+.ucargo{font-size:12px;color:var(--muted);text-align:right;margin-top:2px}
+.seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:999px;padding:3px;background:var(--page)}
+.seg button{border:0;background:none;padding:6px 13px;border-radius:999px;font:700 12px/1 var(--font);
+  color:var(--muted);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--navy);color:#fff}
+.linkbtn{border:0;background:none;padding:0;font:400 12px/1 var(--font);color:var(--muted);
+  text-decoration:underline;cursor:pointer}
+.linkbtn:hover{color:var(--blue-600)}
+.sync{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border:1px solid var(--line-strong);
+  border-radius:999px;font-size:12.5px;color:var(--muted);background:var(--page)}
+.sync.ok .dot{background:var(--green);animation:pulse 2.4s infinite}
+.sync.saving .dot{background:var(--amber)}
+.sync.err .dot{background:var(--red)}
+.sync.err{color:var(--red);border-color:var(--red)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(21,144,95,.45)}70%{box-shadow:0 0 0 7px rgba(21,144,95,0)}
+  100%{box-shadow:0 0 0 0 rgba(21,144,95,0)}}
+.demo{display:inline-flex;gap:7px;align-items:center;padding:5px 12px;border-radius:999px;font-size:12.5px;
+  background:var(--amber-tint);color:var(--amber);border:1px solid #e2c58a}
+.ro-banner{margin-top:20px;padding:12px 16px;border-radius:var(--r);background:var(--blue-50);
+  border:1px solid var(--blue-100);font-size:13px;color:var(--strong);display:flex;gap:12px;
+  align-items:center;flex-wrap:wrap}
+
+/* ---- navegación de personas ---- */
+nav.people{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--card);
+  border-bottom:1px solid var(--line)}
+.people-in{max-width:1180px;margin:0 auto;padding:0 20px;display:flex;gap:2px;overflow-x:auto;
+  scrollbar-width:thin}
+.ptab{flex:0 0 auto;padding:12px 13px 10px;border:0;border-bottom:2px solid transparent;
+  background:none;font:400 13px/1.3 var(--font);color:var(--muted);cursor:pointer;white-space:nowrap;
+  display:flex;align-items:center;gap:7px}
+.ptab:hover{color:var(--strong)}
+.ptab[aria-current="true"]{color:var(--strong);font-weight:700;border-bottom-color:var(--blue)}
+.ptab .pc{font-size:10.5px;color:var(--faint);font-weight:400}
+.ptab.res{font-weight:700;color:var(--blue-600)}
+.ptab .lock{font-size:10px;color:var(--green)}
+.ring{width:15px;height:15px;flex:0 0 auto}
+
+/* ---- tarjetas ---- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);margin-top:20px}
+.card > .ch{padding:15px 20px;border-bottom:1px solid var(--line);display:flex;
+  align-items:baseline;gap:12px;flex-wrap:wrap}
+.ch h2{font-size:15px}
+.wt{font:700 11px/1 var(--font);letter-spacing:.06em;color:var(--blue-600);
+  background:var(--blue-50);border:1px solid var(--blue-100);padding:5px 9px;border-radius:999px}
+.who{font-size:12px;color:var(--muted);margin-left:auto}
+.viv{font:700 26px/1 var(--font);color:var(--strong);font-variant-numeric:tabular-nums;
+  padding:5px 12px;border-radius:var(--r);background:var(--blue-50);border:1px solid var(--blue-100)}
+.viv.na{font-size:12.5px;font-weight:400;color:var(--faint);background:var(--sunken);border-color:var(--line)}
+.naline{display:flex;align-items:center;gap:10px;padding:14px 0 2px;font-size:13px;color:var(--muted);
+  border-top:1px solid var(--line);margin-top:6px}
+.naline input{width:16px;height:16px;flex:0 0 auto;accent-color:var(--blue)}
+.cb{padding:6px 20px 16px}
+
+/* ---- perfil ---- */
+.pgrid{display:grid;grid-template-columns:1fr;gap:16px;padding:14px 0}
+@media(min-width:760px){.pgrid{grid-template-columns:1fr 1fr;gap:18px 28px}}
+.pgrid .full{grid-column:1/-1}
+.pgrid label,.fl{display:block;font:700 10.5px/1.4 var(--font);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--faint);margin-bottom:6px}
+
+/* ---- ítems ---- */
+.item{padding:15px 0;border-bottom:1px solid var(--line);display:grid;gap:12px}
+.item:last-child{border-bottom:0}
+@media(min-width:880px){.item{grid-template-columns:1fr 292px;align-items:center;gap:24px}}
+.comp{font:700 10.5px/1.4 var(--font);letter-spacing:.08em;text-transform:uppercase;color:var(--teal);
+  margin-bottom:4px}
+.qt{font-size:14px;line-height:1.55}
+.scale{display:flex;gap:5px}
+.scale button{flex:1;min-width:0;padding:9px 0;border:1px solid var(--line-strong);background:var(--card);
+  border-radius:var(--r);font:700 13px/1 var(--font);color:var(--muted);cursor:pointer}
+.scale button:hover{border-color:var(--blue);color:var(--strong)}
+.scale button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.scale button[disabled]{cursor:default}
+.scale button[disabled]:hover{border-color:var(--line-strong);color:var(--muted)}
+.scale button[aria-pressed="true"][disabled]:hover{border-color:var(--navy);color:#fff}
+.scale small{display:block;font-weight:400;font-size:9px;margin-top:3px;opacity:.8;letter-spacing:.01em}
+.notebtn{border:0;background:none;padding:3px 5px;margin-left:6px;cursor:pointer;color:var(--faint);
+  font:400 11.5px/1 var(--font);border-radius:var(--r)}
+.notebtn:hover{color:var(--blue-600);background:var(--blue-50)}
+
+/* ---- campos ---- */
+.pre{display:grid;gap:14px;padding:15px 0}
+@media(min-width:760px){.pre{grid-template-columns:1fr 240px;align-items:center;gap:24px}}
+.pre .lb{font-size:14px}
+.pre .hint{font-size:12px;color:var(--muted);margin-top:4px}
+input[type=text],input[type=number],input[type=password],select,textarea{width:100%;font:400 14px/1.5 var(--font);
+  color:var(--text);background:var(--card);border:1px solid var(--line-strong);border-radius:var(--r);
+  padding:9px 11px}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--blue);
+  box-shadow:0 0 0 3px rgba(65,143,222,.25)}
+textarea{min-height:82px;resize:vertical}
+.num{display:flex;align-items:center;gap:8px}
+.num input{text-align:right}
+.unit{color:var(--muted);font-size:13px;flex:0 0 auto}
+input.precargado,select.precargado{background:var(--amber-tint);border-color:#e2c58a}
+
+/* ---- pares ---- */
+.peerq{padding:12px 0;border-bottom:1px solid var(--line);display:flex;gap:12px;font-size:13.5px}
+.peerq span:first-child{flex:0 0 22px;font-weight:700;color:var(--faint);font-size:12px}
+.note-inline{font-size:12.5px;color:var(--muted);padding:12px 0 2px}
+
+/* ---- resultado ---- */
+.res{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:13px 0;border-top:1px solid var(--line);margin-top:4px}
+.res .rl{font:700 12px/1.4 var(--font);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.res .rv{font:700 20px/1 var(--font);color:var(--strong);font-variant-numeric:tabular-nums}
+.res .rv.na{font-size:13px;font-weight:400;color:var(--faint);letter-spacing:.01em}
+.aportelinea{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.4}
+
+/* ---- total ---- */
+.total{margin-top:22px;border:1px solid var(--navy);border-radius:var(--r-lg);overflow:hidden}
+.total .th{background:var(--navy);color:#fff;padding:16px 20px;display:flex;
+  align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.total .th .tl{font:700 12px/1.4 var(--font);letter-spacing:.1em;text-transform:uppercase;opacity:.82}
+.total .th .tv{font:700 34px/1 var(--font);font-variant-numeric:tabular-nums}
+.total .th .tv.pend{font-size:16px;font-weight:400;opacity:.85}
+.bars{padding:4px 20px 16px;background:var(--card)}
+.bar{display:grid;grid-template-columns:1fr 70px 84px 78px;gap:12px;align-items:center;
+  padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
+.bar:last-child{border-bottom:0}
+.bar .bw{color:var(--muted);text-align:right;font-variant-numeric:tabular-nums;font-size:12.5px}
+.bar .bv{text-align:right;font-weight:700;color:var(--strong);font-variant-numeric:tabular-nums}
+.bar .bv.na{font-weight:400;color:var(--faint);font-size:12px}
+.bar .bp{text-align:right;font-weight:700;color:var(--blue-600);font-variant-numeric:tabular-nums}
+.bar .bp.na{font-weight:400;color:var(--faint)}
+.bar.redist .bw{text-decoration:line-through;opacity:.65}
+
+/* ---- consolidado ---- */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--card);margin-top:16px}
+table{border-collapse:collapse;width:100%;min-width:860px;font-size:13px}
+th,td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font:700 10.5px/1.4 var(--font);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  background:var(--page)}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+tbody tr:last-child td{border-bottom:0}
+td.name{font-weight:700;color:var(--strong);white-space:normal;min-width:170px}
+td.cargo{color:var(--muted);white-space:normal;min-width:180px}
+td.small{font-size:11.5px;color:var(--muted);white-space:normal}
+tr.clic{cursor:pointer}
+tr.clic:hover td{background:var(--blue-50)}
+.pill{display:inline-block;padding:3px 9px;border-radius:999px;font-weight:700;font-size:12px}
+.pill.ok{background:var(--green-tint);color:var(--green)}
+.pill.mid{background:var(--amber-tint);color:var(--amber)}
+.pill.low{background:var(--red-tint);color:var(--red)}
+.pill.na{background:var(--sunken);color:var(--faint);font-weight:400}
+.pill.run{background:var(--blue-50);color:var(--blue-600)}
+.prog{height:6px;border-radius:999px;background:var(--sunken);overflow:hidden;min-width:90px}
+.prog i{display:block;height:100%;background:var(--blue);border-radius:999px}
+
+/* ---- KPIs admin ---- */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:14px;margin-top:20px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px 18px}
+.kpi .kl{font:700 10.5px/1.4 var(--font);letter-spacing:.09em;text-transform:uppercase;color:var(--faint)}
+.kpi .kv{font:700 30px/1.1 var(--font);color:var(--strong);margin-top:8px;font-variant-numeric:tabular-nums}
+.kpi .ks{font-size:12px;color:var(--muted);margin-top:4px}
+.kpi.dark{background:var(--navy);border-color:var(--navy)}
+.kpi.dark .kl{color:#fff;opacity:.75}
+.kpi.dark .kv{color:#fff}
+.kpi.dark .ks{color:#fff;opacity:.75}
+
+/* ---- barra inferior ---- */
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;align-items:center}
+.btn{border:1px solid var(--line-strong);background:var(--card);color:var(--strong);
+  padding:9px 16px;border-radius:999px;font:700 13px/1 var(--font);cursor:pointer}
+.btn:hover{border-color:var(--blue);color:var(--blue-600)}
+.btn.pri{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn.pri:hover{background:var(--blue-600);border-color:var(--blue-600);color:#fff}
+.btn.sm{padding:6px 11px;font-size:12px}
+.status{font-size:12.5px;color:var(--muted);margin-left:auto;max-width:520px;line-height:1.45}
+.hidden{display:none!important}
+.sello{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:13px 16px;border-radius:var(--r);
+  font-size:13px;border:1px solid var(--line);background:var(--sunken);color:var(--muted);margin-top:18px}
+.sello.cerrada{background:var(--green-tint);border-color:var(--green);color:var(--green)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.aviso{font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.55}
+.sec-title{font:700 11px/1.4 var(--font);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--faint);margin:30px 0 -6px}
+.foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+
+/* ---- login ---- */
+.login{max-width:480px;margin:40px auto 0}
+.login p{font-size:13.5px;color:var(--muted);margin:12px 0 16px;line-height:1.55}
+.login .row{display:flex;gap:10px;margin-top:6px}
+.login .row input{flex:1}
+.demolist{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+.demolist button{display:flex;width:100%;justify-content:space-between;gap:10px;align-items:center;
+  text-align:left;margin-top:8px;border-radius:var(--r);padding:11px 14px}
+.demolist small{font-weight:400;color:var(--muted)}
+.cargando{padding:80px 20px;text-align:center;color:var(--muted);font-size:14px}
+
+@media print{
+  .userbox .seg,.userbox .linkbtn,.guia,nav.people,.actions,.barra,.notebtn{display:none!important}
+  body{background:#fff}
+  .card,.kpi,.tablewrap{break-inside:avoid}
+  table{min-width:0;font-size:10.5px}
+  th,td{padding:6px 7px;white-space:normal}
+}
+</style>
+</head>
+<body>
+
+<div id="cargando" class="cargando">Cargando el portal de evaluación…</div>
+
+<!-- ============ ingreso ============ -->
+<div id="login" class="hidden">
+  <header class="top"><div class="top-in">
+    <div class="eyebrow">Farmatodo · Desarrollo Organizacional</div>
+    <h1>Evaluación del Comité Ejecutivo 2025-2026</h1>
+    <div class="sub">Portal de evaluación</div>
+  </div></header>
+  <div class="wrap">
+    <div class="card login">
+      <div class="ch"><h2>Ingresar</h2></div>
+      <div class="cb">
+        <p id="loginmsg">Escriba el código de acceso que le envió Desarrollo Organizacional.</p>
+        <label class="fl" for="codigo">Código de acceso</label>
+        <div class="row">
+          <input id="codigo" type="password" autocomplete="off" placeholder="Ej. PLA-7K2QX">
+          <button class="btn pri" id="entrar" type="button">Entrar</button>
+        </div>
+        <div class="aviso" id="loginst"></div>
+        <div class="demolist hidden" id="demolist"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ portal ============ -->
+<div id="app" class="hidden">
+<header class="top">
+  <div class="top-in">
+    <div class="toprow">
+      <div>
+        <div class="eyebrow">Farmatodo · Desarrollo Organizacional</div>
+        <h1 id="titulo">Evaluación del Comité Ejecutivo 2025-2026</h1>
+        <div class="sub" id="subtitulo">Bloques anclados al Inventario de Competencias de Farmatodo</div>
+      </div>
+      <div class="userbox">
+        <div><div class="uname" id="uname"></div><div class="ucargo" id="ucargo"></div></div>
+        <div class="seg hidden" id="modos">
+          <button type="button" data-modo="eval">Mis evaluaciones</button>
+          <button type="button" data-modo="admin">Administración</button>
+        </div>
+        <button class="linkbtn hidden" id="salir" type="button">Cambiar de usuario</button>
+      </div>
+    </div>
+    <div class="barra">
+      <span class="sync saving" id="sync"><span class="dot"></span><span id="synctx">Conectando…</span></span>
+      <span class="demo hidden" id="demotag"><span class="dot"></span>Modo demostración: los datos se guardan solo en este navegador</span>
+    </div>
+    <details class="guia" id="guia">
+      <summary>Cómo funciona</summary>
+      <ol id="guiatxt"></ol>
+    </details>
+  </div>
+</header>
+
+<nav class="people"><div class="people-in" id="tabs"></div></nav>
+
+<div class="wrap">
+  <main id="panel"></main>
+  <section id="resumen" class="hidden"></section>
+  <div class="foot" id="foot"></div>
+</div>
+</div>
+
+<script>
+"use strict";
+
+/* ============ contenido de la evaluación ============ */
+var PESOS = { A:0.50, B:0.10, C:0.20, D:0.10, E:0.10 };
+var BASE_OBJ = 125;
+var NOM_BLOQUE = {A:"Resultados objetivos",B:"Estrategia y ejecución",C:"Liderazgo y Desarrollo de Talento",
+                  D:"Colaboración con el CE",E:"Clima Organizacional"};
+var ESCALA = [
+  {v:1,l:"Nunca"},{v:2,l:"Rara vez"},{v:3,l:"A veces"},{v:4,l:"Casi siempre"},{v:5,l:"Siempre"}
+];
+var ITEMS_B = [
+  ["Visión de Negocio","Define una estrategia propia de su área alineada a la estrategia corporativa a fin de alcanzar ventajas competitivas"],
+  ["Orientación a Resultados Excelentes","Asume riesgos calculados y toma decisiones analizando posibles contingencias, con la estrategia de Farmatodo en mente."],
+  ["Orientación a Resultados Excelentes","Persigue retos beneficiosos a largo plazo y promueve decisiones ágiles que conduzcan al crecimiento sostenible y rentable del negocio."],
+  ["Pensamiento Integral","Alcanza un balance adecuado entre las decisiones de corto plazo sin perder el foco de retos que resulten beneficiosos a largo plazo para la organización"]
+];
+var ITEMS_C = [
+  ["Dirección de Otros","Cuenta con un equipo de liderazgo de alto desempeño"],
+  ["Desarrollo de Otros","Cuenta con un plan de sucesión y un pipeline de líderes que aseguren la visión estratégica del área a futuro de manera exitosa"],
+  ["Desarrollo de Otros","Promueve una estrategia de atracción, desarrollo y retención del talento de su área que responda a las necesidades del negocio"],
+  ["Dirección de Otros","Logra que los integrantes de su equipo trabajen de manera colaborativa"],
+  ["Liderazgo","Es un modelo a seguir y genera confianza y cercanía con su equipo y sus pares"],
+  ["Liderazgo","Es reconocido por la seguridad con la que asume compromisos y situaciones complejas, y transmite una energía que moviliza y genera compromiso."],
+  ["Liderazgo","Logra el compromiso o engagement por parte de los empleados con la misión, visión, valores y sentido de propósito con la organización"],
+  ["Madurez Emocional","Transmite calma y tranquilidad a otros, aun en situaciones apremiantes."],
+  ["Madurez Emocional","Fomenta en los demás la confianza y el optimismo necesarios para buscar soluciones y tomar decisiones frente a los desafíos"],
+  ["Influencia y Negociación","Ante situaciones de negociación actúa para ser percibido como justo y se mantiene enfocado en los objetivos a alcanzar."],
+  ["Influencia y Negociación","Influye con la premisa de llegar a acuerdos ganar-ganar que sostengan relaciones de confianza de largo plazo."]
+];
+var PREG_PARES = [
+  "Comparte información y recursos de su área con los demás miembros del Comité Ejecutivo cuando el negocio lo requiere, sin que haga falta pedírselo.",
+  "Ante dificultades entre áreas, canales o países, tiende puentes y restablece la comunicación en lugar de escalar el problema",
+  "Sostiene en la ejecución los acuerdos tomados en el Comité Ejecutivo, aun cuando afecten las prioridades de su propia área.",
+  "Es accesible y responde cuando necesito su apoyo u opinión, incluso fuera de sus prioridades inmediatas"
+];
+var SUCESOR = ["Listo de 0 a 12 meses","Listo de 2 a 3 años","No tiene sucesor identificado"];
+var NPREG = ITEMS_B.length + ITEMS_C.length;
+
+/* ============ datos de demostración (solo fuera de Google Apps Script) ============ */
+var DEMO = {
+  evaluadores:[
+    {id:"ev_pla",nombre:"Pedro Luis Angarita",cargo:"Presidente Ejecutivo",codigo:"PLA-2526",rol:"EVALUADOR"},
+    {id:"ev_man",nombre:"MAN",cargo:"Evaluador grupo 2",codigo:"MAN-2526",rol:"EVALUADOR"},
+    {id:"ev_g3",nombre:"Evaluador grupo 3",cargo:"Por definir",codigo:"G3-2526",rol:"EVALUADOR"},
+    {id:"ev_mp",nombre:"Michael Penfold",cargo:"Vicepresidente de Relaciones Corporativas",codigo:"MP-2526",rol:"EVALUADOR"},
+    {id:"admin",nombre:"Administrador",cargo:"Desarrollo Organizacional",codigo:"ADMIN-2526",rol:"ADMIN"}
+  ],
+  evaluados:[
+    {id:"cortes",cargo:"Country Manager Colombia",nombre:"Carlos Andrés Cortés",anios:"2 años",prof:"Ing. Agro Industrial",estudios:"",exper:"Operaciones y Comercial",evaluadorId:"ev_pla",clima:83,critSuc:73,sucesor:"Listo de 2 a 3 años",objetivos:107.9},
+    {id:"tzubillaga",cargo:"Country Manager Argentina",nombre:"Teodoro Zubillaga",anios:"10 años",prof:"Economista",estudios:"MBA Columbia",exper:"Operaciones y Comercial",evaluadorId:"ev_pla",clima:80,critSuc:40,sucesor:"Listo de 2 a 3 años",objetivos:62.2},
+    {id:"barraud",cargo:"VP Comercial",nombre:"Stephanie Barraud",evaluadorId:"ev_pla",clima:80,critSuc:69,sucesor:"Listo de 2 a 3 años"},
+    {id:"guilarte",cargo:"VP Cadena Suministro",nombre:"Michael Guilarte",anios:"10 años",prof:"Derecho",estudios:"PAG IESA\nSupply Chain Fundamentals Georgia Tech",exper:"Operaciones y Comercial",evaluadorId:"ev_pla",clima:78,critSuc:75,sucesor:"Listo de 2 a 3 años",objetivos:106.86},
+    {id:"nunez",cargo:"VP Recursos Humanos",nombre:"María Antonieta Núñez",anios:"12 años",prof:"Ingeniero Civil",estudios:"MBA IESA\nStrategic HR Planning Michigan",exper:"Conocimientos financieros",evaluadorId:"ev_pla",clima:85,critSuc:100,sucesor:"Listo de 0 a 12 meses",objetivos:113.48},
+    {id:"trigo",cargo:"VP Finanzas",nombre:"Guillermo Trigo",evaluadorId:"ev_pla",clima:84,critSuc:86,sucesor:"Listo de 0 a 12 meses"},
+    {id:"jzubillaga",cargo:"VP Tecnología de la Información y Transformación Digital",nombre:"José Antonio Zubillaga",anios:"3 años",prof:"Ing. Industrial",exper:"Operaciones",evaluadorId:"ev_pla",objetivos:114.68,clima:84,critSuc:100,sucesor:"Listo de 0 a 12 meses"},
+    {id:"osorio",cargo:"VP Operaciones",nombre:"Roberto Osorio (Encargado)",evaluadorId:"ev_pla",clima:80,critSuc:86,sucesor:"No tiene sucesor identificado",objetivos:106.03},
+    {id:"relcorp",cargo:"Vicepresidente de Relaciones Corporativas",nombre:"Michael Penfold",evaluadorId:"ev_pla",critSuc:100,sucesor:"Listo de 2 a 3 años",naClima:true},
+    {id:"moreno",cargo:"Director Legal",nombre:"José Ignacio Moreno",anios:"14 años",prof:"Derecho",estudios:"MBA IESA",evaluadorId:"ev_man",objetivos:105,naClima:true},
+    {id:"rangel",cargo:"Director Protección Integral",nombre:"Roger Rangel",anios:"4 años",prof:"Administración y Gestión de Riesgo",estudios:"Magíster IAESEN",evaluadorId:"ev_man",objetivos:118.79,clima:94,critSuc:100,sucesor:"Listo de 2 a 3 años"},
+    {id:"davila",cargo:"Director Auditoría",nombre:"Syr Dávila",anios:"1 año",prof:"Contaduría Pública",estudios:"PAG IESA",exper:"Conocimientos financieros",evaluadorId:"ev_g3",objetivos:106.44,clima:89,critSuc:100,sucesor:"Listo de 2 a 3 años"},
+    {id:"wpaz",cargo:"Director de Relaciones Corporativas",nombre:"William Paz-Castillo",evaluadorId:"ev_mp",naClima:true}
+  ]
+};
+
+/* ============ conexión con el servidor ============ */
+var EN_GAS = (typeof google!=="undefined" && google.script && google.script.run) ? true : false;
+var api = EN_GAS ? apiGas() : apiDemo();
+
+function apiGas(){
+  function llama(fn,args){
+    return new Promise(function(ok,mal){
+      var r=google.script.run.withSuccessHandler(ok).withFailureHandler(mal);
+      r[fn].apply(r,args);
+    });
+  }
+  return {
+    demo:false,
+    bootstrap:function(c){ return llama("apiBootstrap",[c||""]); },
+    save:function(c,id,d,s){ return llama("apiSave",[c||"",id,JSON.stringify(d),JSON.stringify(s)]); },
+    poll:function(c,desde){ return llama("apiPoll",[c||"",desde]); }
+  };
+}
+function apiDemo(){
+  var K="portalCE2526-demo";
+  function lee(){ try{ var o=JSON.parse(localStorage.getItem(K)||"null"); if(o&&o.resp) return o; }catch(e){} return {resp:{}}; }
+  function escribe(o){ try{ localStorage.setItem(K,JSON.stringify(o)); }catch(e){} }
+  function quien(c){
+    c=String(c||"").trim().toUpperCase();
+    for(var i=0;i<DEMO.evaluadores.length;i++) if(DEMO.evaluadores[i].codigo===c) return DEMO.evaluadores[i];
+    return null;
+  }
+  function adm(u){ return /ADMIN/.test(u.rol); }
+  function vis(u){ return DEMO.evaluados.filter(function(p){ return adm(u)||p.evaluadorId===u.id; })
+                     .map(function(p){ return JSON.parse(JSON.stringify(p)); }); }
+  function espera(x){ return new Promise(function(ok){ setTimeout(function(){ ok(x); },180); }); }
+  return {
+    demo:true,
+    bootstrap:function(c){
+      var u=quien(c);
+      if(!u) return espera({ok:false,needLogin:true,demo:true,codigoInvalido:!!c,
+        usuarios:DEMO.evaluadores.map(function(e){ return {nombre:e.nombre,cargo:e.cargo,codigo:e.codigo,rol:e.rol}; })});
+      var o=lee(), v=vis(u), r={};
+      v.forEach(function(p){ if(o.resp[p.id]) r[p.id]=o.resp[p.id]; });
+      return espera({ok:true,user:{id:u.id,nombre:u.nombre,cargo:u.cargo,admin:adm(u),porCodigo:true},
+        evaluadores:DEMO.evaluadores.map(function(e){ return {id:e.id,nombre:e.nombre,cargo:e.cargo}; }),
+        evaluados:v,respuestas:r,now:Date.now()});
+    },
+    save:function(c,id,d){
+      var u=quien(c); if(!u) return espera({ok:false,needLogin:true});
+      var o=lee(), t=Date.now();
+      o.resp[id]={data:JSON.parse(JSON.stringify(d)),updated:t,updatedBy:u.nombre};
+      escribe(o); return espera({ok:true,updated:t});
+    },
+    poll:function(c,desde){
+      var u=quien(c); if(!u) return espera({ok:false,needLogin:true});
+      var o=lee(), r={};
+      vis(u).forEach(function(p){ var x=o.resp[p.id]; if(x && x.updated>desde) r[p.id]=x; });
+      return espera({ok:true,respuestas:r,now:Date.now()});
+    }
+  };
+}
+
+/* ============ estado ============ */
+var S = { codigo:"", user:null, evaluadores:[], evaluados:[], modo:"eval", desde:0, ultimo:0 };
+var datos = {}, meta = {}, sucio = {}, enVuelo = {};
+var actual = "_res";
+var refrescos = [];
+var CLAVE_COD = "portalCE2526-codigo", CLAVE_RESPALDO = "portalCE2526-respaldo";
+
+function $(id){ return document.getElementById(id); }
+function ls(k,v){ try{ if(v===undefined) return localStorage.getItem(k); if(v===null) localStorage.removeItem(k); else localStorage.setItem(k,v); }catch(e){ return null; } }
+
+function vacio(){ return { b:[null,null,null,null], c:new Array(11).fill(null),
+  objetivos:null, clima:null, pares:null, critSuc:null, sucesor:"", com:"", prior:"", apoyo:"",
+  cerrada:false, cerradaPor:"", cerradaEn:"", perfil:{}, naPares:false, naClima:false, notas:{} }; }
+function normaliza(v){
+  var base=vacio(), k;
+  if(!v || typeof v!=="object") return base;
+  for(k in base) if(v[k]!==undefined) base[k]=v[k];
+  if(!Array.isArray(base.b)) base.b=vacio().b;
+  if(!Array.isArray(base.c)) base.c=vacio().c;
+  if(!base.perfil || typeof base.perfil!=="object") base.perfil={};
+  if(!base.notas || typeof base.notas!=="object") base.notas={};
+  return base;
+}
+function precarga(p){
+  var b=vacio();
+  ["objetivos","clima","critSuc","pares"].forEach(function(k){ if(typeof p[k]==="number") b[k]=p[k]; });
+  if(p.sucesor) b.sucesor=p.sucesor;
+  if(p.naClima===true) b.naClima=true;
+  if(p.naPares===true) b.naPares=true;
+  return b;
+}
+function fichaDe(id){ for(var i=0;i<S.evaluados.length;i++) if(S.evaluados[i].id===id) return S.evaluados[i]; return null; }
+function dd(id){ if(!datos[id]){ var p=fichaDe(id); datos[id]= p? precarga(p) : vacio(); } return datos[id]; }
+function perfilVal(p,k){ var o=dd(p.id).perfil||{}; return o[k]!==undefined ? o[k] : (p[k]||""); }
+function nombreEvaluador(id){ for(var i=0;i<S.evaluadores.length;i++) if(S.evaluadores[i].id===id) return S.evaluadores[i].nombre; return "Sin asignar"; }
+function cargoEvaluador(id){ for(var i=0;i<S.evaluadores.length;i++) if(S.evaluadores[i].id===id) return S.evaluadores[i].cargo; return ""; }
+function misEvaluados(){ return S.evaluados.filter(function(p){ return p.evaluadorId===S.user.id; }); }
+function listaActual(){ return S.modo==="admin" ? S.evaluados : misEvaluados(); }
+function cerrada(id){ return dd(id).cerrada===true; }
+function soloLectura(){ return S.modo==="admin"; }
+function editable(id){ return !soloLectura() && !cerrada(id); }
+function iniciada(id){ return !!meta[id]; }
+
+/* ============ cálculo ============ */
+function prom(arr){
+  var s=0,n=0; for(var i=0;i<arr.length;i++){ if(typeof arr[i]==="number"){ s+=arr[i]; n++; } }
+  return n? s/n : null;
+}
+function bloques(id){
+  var d=dd(id), pb=prom(d.b), pc=prom(d.c);
+  return {
+    A: typeof d.objetivos==="number" ? Math.min(d.objetivos/BASE_OBJ,1) : null,
+    B: pb===null? null : pb/5,
+    C: pc===null? null : pc/5,
+    D: typeof d.pares==="number" ? d.pares/5 : null,
+    E: typeof d.clima==="number" ? d.clima/100 : null
+  };
+}
+function noAplica(id,k){ var d=dd(id); return (k==="D" && d.naPares===true) || (k==="E" && d.naClima===true); }
+function estadoBloque(id,k){ if(noAplica(id,k)) return "na"; return bloques(id)[k]===null ? "pend" : "ok"; }
+function pesosEfectivos(id){
+  var den=0, k, out={};
+  for(k in PESOS) if(!noAplica(id,k)) den+=PESOS[k];
+  for(k in PESOS) out[k] = noAplica(id,k) ? null : (den>0 ? PESOS[k]/den : null);
+  return out;
+}
+function puntos(id,k){
+  var e=estadoBloque(id,k);
+  if(e==="na") return null;
+  if(e==="pend") return 0;
+  return pesosEfectivos(id)[k]*bloques(id)[k]*100;
+}
+function completa(id){ for(var k in PESOS) if(estadoBloque(id,k)==="pend") return false; return true; }
+function total(id){
+  var acc=0, hay=false, k;
+  for(k in PESOS){ var q=puntos(id,k); if(q!==null){ acc+=q; if(estadoBloque(id,k)==="ok") hay=true; } }
+  return hay ? acc/100 : null;
+}
+function faltan(id){
+  var d=dd(id), n=0, i;
+  for(i=0;i<d.b.length;i++) if(typeof d.b[i]!=="number") n++;
+  for(i=0;i<d.c.length;i++) if(typeof d.c[i]!=="number") n++;
+  return n;
+}
+function resumenDe(id){
+  var r=bloques(id);
+  return {A:r.A,B:r.B,C:r.C,D:r.D,E:r.E,total:total(id),completa:completa(id),pendientes:faltan(id)};
+}
+function un(x,d){ return x.toLocaleString("es-VE",{minimumFractionDigits:d,maximumFractionDigits:d}); }
+function pct(x){ return x===null||x===undefined? "—" : un(Math.round(x*1000)/10,1) + "%"; }
+function fecha(iso){
+  if(!iso) return "";
+  var d=new Date(iso); if(isNaN(d)) return "";
+  var M=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+  var hh=("0"+d.getHours()).slice(-2), mm=("0"+d.getMinutes()).slice(-2);
+  return d.getDate()+" de "+M[d.getMonth()]+" de "+d.getFullYear()+", "+hh+":"+mm;
+}
+function hora(ms){ var d=new Date(ms); return ("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)+":"+("0"+d.getSeconds()).slice(-2); }
+function hace(ms){
+  if(!ms) return "—";
+  var s=Math.round((Date.now()-ms)/1000);
+  if(s<60) return "hace un momento";
+  if(s<3600) return "hace "+Math.round(s/60)+" min";
+  if(s<86400) return "hace "+Math.round(s/3600)+" h";
+  return fecha(ms);
+}
+function selloTexto(id){
+  var d=dd(id), s="";
+  if(d.cerradaPor) s+=" por "+d.cerradaPor;
+  if(d.cerradaEn) s+=" el "+fecha(d.cerradaEn);
+  return s;
+}
+
+/* ============ sincronización ============ */
+function sync(est,txt){ var c=$("sync"); c.className="sync "+est; $("synctx").textContent=txt; }
+function etiquetaOk(){
+  var base = api.demo ? "Guardado en este navegador" : "Sincronizado con Google Sheets";
+  return base + (S.ultimo? " · "+hora(S.ultimo) : "");
+}
+var tGuardar=null, tReintento=null;
+function guardar(id){
+  if(soloLectura()) return;
+  sucio[id]=true;
+  respaldoLocal();
+  sync("saving","Cambios sin guardar…");
+  clearTimeout(tGuardar);
+  tGuardar=setTimeout(envia,900);
+}
+function respaldoLocal(){
+  var o={}; for(var id in sucio) if(sucio[id]) o[id]=datos[id];
+  ls(CLAVE_RESPALDO+"-"+(S.user?S.user.id:""), JSON.stringify(o));
+}
+function envia(){
+  var ids=Object.keys(sucio).filter(function(k){ return sucio[k] && !enVuelo[k]; });
+  if(!ids.length) return;
+  sync("saving","Guardando…");
+  var errores=0;
+  Promise.all(ids.map(function(id){
+    sucio[id]=false; enVuelo[id]=true;
+    var copia=JSON.parse(JSON.stringify(datos[id]));
+    return api.save(S.codigo,id,copia,resumenDe(id)).then(function(r){
+      enVuelo[id]=false;
+      if(r && r.ok){ meta[id]={updated:r.updated,updatedBy:S.user.nombre}; S.ultimo=r.updated; }
+      else{ sucio[id]=true; errores++; if(r && r.needLogin) salir("Su sesión expiró. Ingrese de nuevo."); }
+    },function(){ enVuelo[id]=false; sucio[id]=true; errores++; });
+  })).then(function(){
+    var quedan=Object.keys(sucio).some(function(k){ return sucio[k]; });
+    if(errores){
+      sync("err","Sin conexión. Sus cambios están a salvo en este navegador y se reintentará en unos segundos");
+      clearTimeout(tReintento); tReintento=setTimeout(envia,6000);
+    } else if(quedan){ envia(); }
+    else { respaldoLocal(); sync("ok",etiquetaOk()); pintaTabs(); }
+  });
+}
+function hayPendientes(){ return Object.keys(sucio).some(function(k){ return sucio[k]||enVuelo[k]; }); }
+window.addEventListener("beforeunload",function(e){ if(hayPendientes()){ e.preventDefault(); e.returnValue=""; } });
+
+var tPoll=null;
+function programaPoll(){ clearTimeout(tPoll); tPoll=setTimeout(poll, S.modo==="admin"? 12000 : 20000); }
+function poll(){
+  if(!S.user) return;
+  if(document.hidden){ programaPoll(); return; }
+  api.poll(S.codigo,S.desde-3000).then(function(r){
+    if(r && r.ok){
+      S.desde=r.now;
+      var cambio=aplicaRemotos(r.respuestas||{});
+      if(!hayPendientes()) sync("ok",etiquetaOk());
+      if(cambio){
+        if(actual==="_res") construye(); else pinta();
+      }
+    } else if(r && r.needLogin){ salir("Su sesión expiró. Ingrese de nuevo."); return; }
+    programaPoll();
+  },function(){ sync("err","Sin conexión con el servidor. Reintentando…"); programaPoll(); });
+}
+function reemplaza(id,nuevo){
+  /* se actualiza el mismo objeto para que la vista abierta siga enlazada */
+  var o=datos[id];
+  if(!o){ datos[id]=nuevo; return; }
+  Object.keys(o).forEach(function(k){ delete o[k]; });
+  for(var k in nuevo) o[k]=nuevo[k];
+}
+function aplicaRemotos(rs){
+  var cambio=false;
+  for(var id in rs){
+    var x=rs[id]; if(!x) continue;
+    if(sucio[id]||enVuelo[id]) continue;
+    if(meta[id] && meta[id].updated>=x.updated) continue;
+    reemplaza(id,normaliza(x.data)); meta[id]={updated:x.updated,updatedBy:x.updatedBy};
+    if(x.updated>S.ultimo) S.ultimo=x.updated;
+    cambio=true;
+  }
+  return cambio;
+}
+document.addEventListener("visibilitychange",function(){ if(!document.hidden && S.user) poll(); });
+
+/* ============ utilidades de construcción ============ */
+function el(tag,cls,txt){
+  var e=document.createElement(tag);
+  if(cls) e.className=cls;
+  if(txt!=null) e.textContent=txt;
+  return e;
+}
+function boton(txt,cls,fn){ var b=el("button",cls||"btn",txt); b.type="button"; if(fn) b.addEventListener("click",fn); return b; }
+
+function botonNota(clave,contenedor){
+  var b=el("button","notebtn","+ nota"); b.type="button";
+  var caja=el("div","notabox hidden");
+  caja.appendChild(el("div","nl","Nota sobre este punto"));
+  var ta=document.createElement("textarea");
+  ta.placeholder="Escriba aquí su observación sobre esta pregunta o este campo.";
+  ta.addEventListener("input",function(){
+    if(soloLectura()) return;
+    var n=dd(actual).notas;
+    if(ta.value.trim()==="") delete n[clave]; else n[clave]=ta.value;
+    marca(); guardar(actual);
+  });
+  caja.appendChild(ta);
+  contenedor.appendChild(caja);
+  function marca(){
+    var n=dd(actual).notas;
+    b.className = n[clave]? "notebtn tiene":"notebtn";
+    b.textContent = n[clave]? "· nota" : "+ nota";
+  }
+  b.addEventListener("click",function(ev){
+    ev.preventDefault();
+    caja.classList.toggle("hidden");
+    if(!caja.classList.contains("hidden")) ta.focus();
+  });
+  refrescos.push(function(){
+    var n=dd(actual).notas;
+    if(document.activeElement!==ta) ta.value = n[clave] || "";
+    ta.disabled = soloLectura();
+    marca();
+    if(n[clave]) caja.classList.remove("hidden");
+    b.classList.toggle("hidden", soloLectura() && !n[clave]);
+  });
+  return b;
+}
+function card(titulo,peso,quien,clave){
+  var c=el("div","card"), h=el("div","ch");
+  h.appendChild(el("h2",null,titulo));
+  if(peso) h.appendChild(el("span","wt",peso));
+  if(quien) h.appendChild(el("span","who",quien));
+  if(clave){
+    var viv=el("span","viv"); h.appendChild(viv);
+    refrescos.push(function(){
+      var e=estadoBloque(actual,clave), x=bloques(actual)[clave];
+      if(e==="na"){ viv.textContent="No aplica"; viv.className="viv na"; }
+      else if(e==="pend"){ viv.textContent="Sin responder"; viv.className="viv na"; }
+      else { viv.textContent=pct(x); viv.className="viv"; }
+    });
+  }
+  c.appendChild(h);
+  var b=el("div","cb"); c.appendChild(b);
+  c.body=b; return c;
+}
+function casillaNA(cuerpo,clave,ayuda){
+  var w=el("div","naline");
+  var ch=document.createElement("input"); ch.type="checkbox";
+  var lb=document.createElement("label");
+  lb.appendChild(document.createTextNode("No aplica. "+ayuda+" El peso de este bloque se reparte entre los demás."));
+  ch.addEventListener("change",function(){
+    if(!editable(actual)){ ch.checked=dd(actual)[clave]===true; return; }
+    dd(actual)[clave]=ch.checked; pinta(); guardar(actual);
+  });
+  w.appendChild(ch); w.appendChild(lb); cuerpo.appendChild(w);
+  refrescos.push(function(){ ch.checked = dd(actual)[clave]===true; ch.disabled = !editable(actual); });
+}
+function filaResultado(cuerpo,etiqueta,fn,clave){
+  var r=el("div","res"); r.appendChild(el("span","rl",etiqueta));
+  var caja=el("div"); caja.style.textAlign="right";
+  var v=el("span","rv"); caja.appendChild(v);
+  var ap=el("div","aportelinea"); caja.appendChild(ap);
+  r.appendChild(caja); cuerpo.appendChild(r);
+  refrescos.push(function(){
+    var x=fn(), est=estadoBloque(actual,clave);
+    v.textContent = x===null? (est==="na"? "No aplica":"Sin responder") : pct(x);
+    v.className = x===null? "rv na" : "rv";
+    if(est==="na"){ ap.textContent="No aporta puntos. Su peso se repartió entre los demás bloques."; return; }
+    var e=pesosEfectivos(actual)[clave];
+    var nom=Math.round(PESOS[clave]*100), efe=Math.round(e*1000)/10;
+    var tope = (efe===nom? String(nom) : un(efe,1)+" (subió desde "+nom+" por un bloque que no aplica)");
+    ap.textContent = est==="pend" ? ("Aún no aporta puntos. Su tope es "+tope)
+                                  : ("Aporta "+un(puntos(actual,clave),1)+" de "+tope+" puntos");
+  });
+}
+function itemEscala(cuerpo,comp,texto,get,set){
+  var it=el("div","item"), izq=el("div");
+  izq.appendChild(el("div","comp",comp));
+  var q=el("div","qt",texto);
+  q.appendChild(botonNota("Pregunta · "+texto, izq));
+  izq.appendChild(q);
+  it.appendChild(izq);
+  var sc=el("div","scale");
+  ESCALA.forEach(function(o){
+    var b=el("button"); b.type="button";
+    b.appendChild(document.createTextNode(String(o.v)));
+    b.appendChild(el("small",null,o.l));
+    b.addEventListener("click",function(){
+      if(!editable(actual)) return;
+      set(get()===o.v ? null : o.v);
+      pinta(); guardar(actual);
+    });
+    sc.appendChild(b);
+    refrescos.push(function(){
+      b.setAttribute("aria-pressed", get()===o.v ? "true":"false");
+      b.disabled = !editable(actual);
+    });
+  });
+  it.appendChild(sc);
+  cuerpo.appendChild(it);
+}
+function campoNumero(cuerpo,etiqueta,ayuda,unidad,min,max,paso,get,set,precargado){
+  var w=el("div","pre"), izq=el("div");
+  var lb=el("div","lb",etiqueta);
+  lb.appendChild(botonNota("Campo · "+etiqueta, izq));
+  izq.appendChild(lb);
+  if(ayuda) izq.appendChild(el("div","hint",ayuda));
+  w.appendChild(izq);
+  var n=el("div","num");
+  var inp=document.createElement("input");
+  inp.type="number"; inp.min=min; inp.max=max; inp.step=paso; inp.placeholder="—";
+  if(precargado) inp.className="precargado";
+  inp.addEventListener("input",function(){
+    if(!editable(actual)) return;
+    var v=inp.value===""? null : Number(inp.value);
+    if(v!==null && (isNaN(v)||v<min||v>max)) return;
+    set(v); pinta(); guardar(actual);
+  });
+  n.appendChild(inp); n.appendChild(el("span","unit",unidad));
+  w.appendChild(n); cuerpo.appendChild(w);
+  refrescos.push(function(){
+    var v=get(); if(document.activeElement!==inp) inp.value=(v===null||v===undefined)? "" : v;
+    inp.disabled=!editable(actual);
+  });
+}
+function campoTexto(cuerpo,etiqueta,get,set){
+  var w=el("div","pre"); w.style.gridTemplateColumns="1fr";
+  var lb=el("div","lb",etiqueta);
+  lb.appendChild(botonNota("Campo · "+etiqueta, w));
+  w.appendChild(lb);
+  var ta=document.createElement("textarea");
+  ta.addEventListener("input",function(){ if(!editable(actual)) return; set(ta.value); guardar(actual); });
+  w.appendChild(ta); cuerpo.appendChild(w);
+  refrescos.push(function(){
+    if(document.activeElement!==ta) ta.value=get()||"";
+    ta.disabled=!editable(actual);
+  });
+}
+function anillo(frac){
+  var ns="http://www.w3.org/2000/svg";
+  var s=document.createElementNS(ns,"svg");
+  s.setAttribute("viewBox","0 0 20 20"); s.setAttribute("class","ring");
+  var b=document.createElementNS(ns,"circle");
+  b.setAttribute("cx","10"); b.setAttribute("cy","10"); b.setAttribute("r","8");
+  b.setAttribute("fill","none"); b.setAttribute("stroke","var(--line-strong)"); b.setAttribute("stroke-width","3");
+  s.appendChild(b);
+  var f=document.createElementNS(ns,"circle"), c=2*Math.PI*8;
+  f.setAttribute("cx","10"); f.setAttribute("cy","10"); f.setAttribute("r","8");
+  f.setAttribute("fill","none"); f.setAttribute("stroke", frac>=1? "var(--green)":"var(--blue)");
+  f.setAttribute("stroke-width","3"); f.setAttribute("stroke-linecap","round");
+  f.setAttribute("stroke-dasharray", (c*frac)+" "+c);
+  f.setAttribute("transform","rotate(-90 10 10)");
+  s.appendChild(f);
+  return s;
+}
+
+/* ============ pestañas ============ */
+function pintaTabs(){
+  var t=$("tabs"); t.textContent="";
+  var r=el("button","ptab res"); r.type="button";
+  r.setAttribute("aria-current", actual==="_res" ? "true":"false");
+  r.appendChild(el("span",null, S.modo==="admin" ? "Consolidado general" : "Mi resumen"));
+  r.addEventListener("click",function(){ actual="_res"; construye(); window.scrollTo({top:0}); });
+  t.appendChild(r);
+  listaActual().forEach(function(p){
+    var b=el("button","ptab"); b.type="button";
+    b.setAttribute("aria-current", p.id===actual ? "true":"false");
+    var hechos=NPREG-faltan(p.id);
+    b.appendChild(anillo(hechos/NPREG));
+    b.appendChild(el("span",null,perfilVal(p,"nombre") || perfilVal(p,"cargo")));
+    b.appendChild(el("span","pc", cerrada(p.id) ? "cerrada" : hechos+"/"+NPREG));
+    b.addEventListener("click",function(){ actual=p.id; construye(); window.scrollTo({top:0,behavior:"smooth"}); });
+    t.appendChild(b);
+  });
+}
+
+/* ============ tablas de resultados ============ */
+function pillTotal(id){
+  var tt=total(id);
+  if(tt===null) return el("span","pill na","Sin datos");
+  if(!completa(id)) return el("span","pill na", pct(tt)+" parcial");
+  var cl = tt>=0.85? "ok" : (tt>=0.70? "mid":"low");
+  return el("span","pill "+cl, pct(tt));
+}
+function pillEstado(id){
+  if(cerrada(id)) return el("span","pill ok","Cerrada");
+  if(iniciada(id)) return el("span","pill run","En curso");
+  return el("span","pill na","Sin iniciar");
+}
+function tablaResultados(lista,conEvaluador){
+  var w=el("div","tablewrap"), t=el("table");
+  var thead=el("thead"), tr=el("tr");
+  var cols=["Cargo","Ocupante"];
+  if(conEvaluador) cols.push("Evaluador");
+  cols=cols.concat(["Objetivos 50%","Estrategia 10%","Liderazgo 20%","Pares 10%","Clima 10%","Total","Pendientes","Estado","Actualizado"]);
+  var ini=conEvaluador?3:2;
+  cols.forEach(function(h,i){ tr.appendChild(el("th",(i>=ini&&i<=ini+6)?"n":null,h)); });
+  thead.appendChild(tr); t.appendChild(thead);
+  var tb=el("tbody");
+  lista.forEach(function(p){
+    var r=bloques(p.id), row=el("tr","clic");
+    row.title="Ver la evaluación";
+    row.addEventListener("click",function(){ actual=p.id; construye(); window.scrollTo({top:0}); });
+    row.appendChild(el("td","cargo",perfilVal(p,"cargo")));
+    row.appendChild(el("td","name",perfilVal(p,"nombre")||"Vacante"));
+    if(conEvaluador) row.appendChild(el("td","cargo",nombreEvaluador(p.evaluadorId)));
+    ["A","B","C","D","E"].forEach(function(k){
+      row.appendChild(el("td","n", estadoBloque(p.id,k)==="na" ? "n/a" : pct(r[k])));
+    });
+    var td=el("td","n"); td.appendChild(pillTotal(p.id)); row.appendChild(td);
+    row.appendChild(el("td","n", String(faltan(p.id))));
+    var te=el("td"); te.appendChild(pillEstado(p.id));
+    if(cerrada(p.id)){ var q=selloTexto(p.id); if(q) te.appendChild(el("div","small",q.replace(/^ /,""))); }
+    row.appendChild(te);
+    row.appendChild(el("td","small", meta[p.id]? hace(meta[p.id].updated)+(meta[p.id].updatedBy? " · "+meta[p.id].updatedBy:"") : "—"));
+    tb.appendChild(row);
+  });
+  if(!lista.length){
+    var tr0=el("tr"), td0=el("td","small","No hay evaluados asignados."); td0.colSpan=cols.length; tr0.appendChild(td0); tb.appendChild(tr0);
+  }
+  t.appendChild(tb); w.appendChild(t);
+  return w;
+}
+function kpi(etq,val,sub,oscuro){
+  var k=el("div","kpi"+(oscuro?" dark":""));
+  k.appendChild(el("div","kl",etq)); k.appendChild(el("div","kv",val));
+  if(sub) k.appendChild(el("div","ks",sub));
+  return k;
+}
+function indicadores(lista){
+  var n=lista.length, c=0, e=0, sumT=0, nT=0, resp=0;
+  lista.forEach(function(p){
+    if(cerrada(p.id)) c++; else if(iniciada(p.id)) e++;
+    resp+=NPREG-faltan(p.id);
+    var t=total(p.id); if(t!==null && completa(p.id)){ sumT+=t; nT++; }
+  });
+  return {n:n,cerradas:c,curso:e,sin:n-c-e,prom:nT? sumT/nT : null,nProm:nT,avance:n? resp/(n*NPREG):0};
+}
+
+/* ============ vista resumen del evaluador ============ */
+function pintaResumen(sec){
+  var lista=misEvaluados(), k=indicadores(lista);
+  sec.appendChild(el("div","sec-title","Mis evaluados"));
+  var g=el("div","kpis");
+  g.appendChild(kpi("Asignados",String(k.n),"personas a evaluar",true));
+  g.appendChild(kpi("Cerradas",String(k.cerradas),k.n? Math.round(k.cerradas/k.n*100)+"% del total":""));
+  g.appendChild(kpi("En curso",String(k.curso),"con respuestas guardadas"));
+  g.appendChild(kpi("Preguntas respondidas",Math.round(k.avance*100)+"%","de "+(k.n*NPREG)+" en total"));
+  sec.appendChild(g);
+  sec.appendChild(tablaResultados(lista,false));
+  var a=el("div","actions");
+  a.appendChild(boton("Exportar mis resultados (Excel / CSV)","btn pri",function(){
+    bajaArchivo("evaluacion-CE-25-26-"+slug(S.user.nombre)+"-"+hoyStr()+".csv", csvTexto(lista,S.user.nombre+", "+S.user.cargo));
+    estado("Archivo descargado con "+lista.length+" evaluado"+(lista.length===1?"":"s")+".");
+  }));
+  a.appendChild(boton("Exportar mis notas","btn",function(){
+    bajaArchivo("notas-evaluacion-CE-"+slug(S.user.nombre)+".csv", notasTexto(lista));
+  }));
+  a.appendChild(boton("Imprimir o guardar en PDF","btn",function(){ window.print(); }));
+  a.appendChild(el("span","status st"));
+  sec.appendChild(a);
+}
+
+/* ============ vista administración ============ */
+function pintaAdmin(sec){
+  var lista=S.evaluados, k=indicadores(lista);
+  sec.appendChild(el("div","sec-title","Resultados consolidados en vivo"));
+  var g=el("div","kpis");
+  g.appendChild(kpi("Evaluados",String(k.n),"en "+evaluadoresConAsignacion().length+" evaluadores",true));
+  g.appendChild(kpi("Cerradas",String(k.cerradas),k.n? Math.round(k.cerradas/k.n*100)+"% del total":""));
+  g.appendChild(kpi("En curso",String(k.curso),"con respuestas guardadas"));
+  g.appendChild(kpi("Sin iniciar",String(k.sin),"aún sin respuestas"));
+  g.appendChild(kpi("Promedio total",k.prom===null?"—":pct(k.prom),k.nProm? "de "+k.nProm+" evaluaciones completas":"sin evaluaciones completas"));
+  sec.appendChild(g);
+
+  /* avance por evaluador */
+  sec.appendChild(el("div","sec-title","Avance por evaluador"));
+  var w=el("div","tablewrap"), t=el("table"), th=el("thead"), tr=el("tr");
+  ["Evaluador","Cargo","Asignados","Cerradas","En curso","Sin iniciar","Preguntas respondidas","Última actividad",""].forEach(function(h,i){
+    tr.appendChild(el("th",(i>=2&&i<=5)?"n":null,h));
+  });
+  th.appendChild(tr); t.appendChild(th);
+  var tb=el("tbody");
+  evaluadoresConAsignacion().forEach(function(ev){
+    var sub=lista.filter(function(p){ return p.evaluadorId===ev.id; }), ki=indicadores(sub);
+    var ult=0; sub.forEach(function(p){ if(meta[p.id] && meta[p.id].updated>ult) ult=meta[p.id].updated; });
+    var row=el("tr");
+    row.appendChild(el("td","name",ev.nombre));
+    row.appendChild(el("td","cargo",ev.cargo));
+    row.appendChild(el("td","n",String(ki.n)));
+    row.appendChild(el("td","n",String(ki.cerradas)));
+    row.appendChild(el("td","n",String(ki.curso)));
+    row.appendChild(el("td","n",String(ki.sin)));
+    var tdp=el("td"), pr=el("div","prog"), bi=el("i"); bi.style.width=Math.round(ki.avance*100)+"%";
+    pr.appendChild(bi); tdp.appendChild(pr); tdp.appendChild(el("div","small",Math.round(ki.avance*100)+"%"));
+    row.appendChild(tdp);
+    row.appendChild(el("td","small", ult? hace(ult) : "—"));
+    var tdb=el("td");
+    tdb.appendChild(boton("Exportar","btn sm",function(){
+      bajaArchivo("evaluacion-CE-25-26-"+slug(ev.nombre)+"-"+hoyStr()+".csv", csvTexto(sub,ev.nombre+", "+ev.cargo));
+    }));
+    row.appendChild(tdb);
+    tb.appendChild(row);
+  });
+  t.appendChild(tb); w.appendChild(t); sec.appendChild(w);
+
+  /* consolidado */
+  sec.appendChild(el("div","sec-title","Detalle por evaluado"));
+  sec.appendChild(tablaResultados(lista,true));
+  var a=el("div","actions");
+  a.appendChild(boton("Exportar consolidado (Excel / CSV)","btn pri",function(){
+    bajaArchivo("consolidado-evaluacion-CE-25-26-"+hoyStr()+".csv", csvTexto(lista,"Todos los evaluadores"));
+    estado("Consolidado descargado.");
+  }));
+  a.appendChild(boton("Exportar notas de todos","btn",function(){
+    bajaArchivo("notas-evaluacion-CE-25-26-"+hoyStr()+".csv", notasTexto(lista));
+  }));
+  a.appendChild(boton("Imprimir o guardar en PDF","btn",function(){ window.print(); }));
+  a.appendChild(boton("Actualizar ahora","btn",function(){ sync("saving","Actualizando…"); clearTimeout(tPoll); poll(); }));
+  a.appendChild(el("span","status st"));
+  sec.appendChild(a);
+}
+function evaluadoresConAsignacion(){
+  var ids={}; S.evaluados.forEach(function(p){ ids[p.evaluadorId]=true; });
+  var out=S.evaluadores.filter(function(e){ return ids[e.id]; });
+  if(ids[""]) out.push({id:"",nombre:"Sin asignar",cargo:""});
+  return out;
+}
+function estado(t){ document.querySelectorAll(".st").forEach(function(a){ a.textContent=t; }); }
+
+/* ============ exportación ============ */
+function csvFila(f){ return f.map(function(c){ return '"'+String(c===null||c===undefined?"":c).replace(/"/g,'""')+'"'; }).join(";"); }
+function csvTexto(lista,etiquetaEvaluador){
+  var L=[];
+  L.push(["Farmatodo — Evaluación del Comité Ejecutivo 2025-2026"]);
+  L.push(["Evaluador",etiquetaEvaluador]);
+  L.push(["Exportado por",S.user.nombre]);
+  L.push(["Descargado el", fecha(new Date().toISOString())]);
+  L.push([]);
+  var enc=["Cargo","Ocupante","Evaluador",
+    "Objetivos 25-26 (50%)","Estrategia y ejecución (10%)","Liderazgo y talento (20%)",
+    "Colaboración pares (10%)","Clima ECO (10%)","TOTAL","Puntos por bloque","Preguntas sin responder",
+    "Estado","Cerrada por","Cerrada el","Última actualización",
+    "% posiciones críticas con sucesor","Sucesión del propio cargo",
+    "Años siendo miembro del CE","Profesión","Otros estudios","Otras áreas de experticia"];
+  ITEMS_B.forEach(function(it,k){ enc.push("B"+(k+1)+" · "+it[0]); });
+  ITEMS_C.forEach(function(it,k){ enc.push("C"+(k+1)+" · "+it[0]); });
+  enc.push("Comentarios y recomendaciones","Prioridades de desarrollo 2026-2027","Apoyo requerido");
+  L.push(enc);
+  lista.forEach(function(p){
+    var d=dd(p.id), r=bloques(p.id), tt=total(p.id);
+    var f=[perfilVal(p,"cargo"), perfilVal(p,"nombre")||"Vacante", nombreEvaluador(p.evaluadorId)];
+    ["A","B","C","D","E"].forEach(function(k){ f.push(estadoBloque(p.id,k)==="na"?"n/a":(r[k]===null?"":pct(r[k]))); });
+    f.push(tt===null?"Sin datos":(pct(tt)+(completa(p.id)?"":" (parcial)")),
+      ["A","B","C","D","E"].map(function(k){ var q=puntos(p.id,k); return q===null?"n/a":un(q,1); }).join(" + "),
+      String(faltan(p.id)),
+      cerrada(p.id)?"Cerrada":(iniciada(p.id)?"En curso":"Sin iniciar"),
+      d.cerrada? (d.cerradaPor||"") : "", d.cerrada? fecha(d.cerradaEn) : "",
+      meta[p.id]? fecha(meta[p.id].updated) : "",
+      d.critSuc===null||d.critSuc===undefined?"":d.critSuc+"%",
+      d.sucesor||"",
+      perfilVal(p,"anios"), perfilVal(p,"prof"),
+      (perfilVal(p,"estudios")||"").replace(/\n/g," · "), perfilVal(p,"exper"));
+    d.b.forEach(function(v){ f.push(typeof v==="number"? String(v):""); });
+    d.c.forEach(function(v){ f.push(typeof v==="number"? String(v):""); });
+    f.push(d.com||"", d.prior||"", d.apoyo||"");
+    L.push(f);
+  });
+  L.push([]);
+  L.push(["Escala","1 Nunca · 2 Rara vez · 3 A veces · 4 Casi siempre · 5 Siempre"]);
+  L.push(["Objetivos","Se evalúan sobre una base de "+BASE_OBJ+": 100 es la meta y "+BASE_OBJ+" el desempeño superior."]);
+  L.push(["Nota","Si un bloque no aplica, su peso se reparte entre los bloques restantes."]);
+  return "\ufeff"+L.map(csvFila).join("\r\n");
+}
+function notasTexto(lista){
+  var L=[["Notas sobre la evaluación del Comité Ejecutivo 2025-2026"],["Fecha",fecha(new Date().toISOString())],[],
+         ["Evaluado","Evaluador","Punto del formulario","Observación"]];
+  var hay=false;
+  lista.forEach(function(p){
+    var n=dd(p.id).notas||{};
+    for(var k in n){ if(n[k] && n[k].trim()){ L.push([perfilVal(p,"nombre"),nombreEvaluador(p.evaluadorId),k,n[k]]); hay=true; } }
+  });
+  if(!hay) L.push(["(sin notas)","","",""]);
+  return "\ufeff"+L.map(csvFila).join("\r\n");
+}
+function bajaArchivo(nombre,texto,tipo){
+  var blob=new Blob([texto],{type:(tipo||"text/csv")+";charset=utf-8"});
+  var a=document.createElement("a");
+  a.href=URL.createObjectURL(blob); a.download=nombre;
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },400);
+}
+function slug(s){ return String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^A-Za-z0-9]+/g,"-").replace(/^-|-$/g,"").toUpperCase(); }
+function hoyStr(){ var d=new Date(); return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2); }
+
+/* ============ construcción de vistas ============ */
+function construye(){
+  refrescos=[];
+  pintaTabs();
+  var panel=$("panel"), res=$("resumen");
+  panel.textContent=""; res.textContent="";
+  if(actual!=="_res" && !listaActual().some(function(p){ return p.id===actual; })) actual="_res";
+  if(actual==="_res"){
+    panel.classList.add("hidden"); res.classList.remove("hidden");
+    if(S.modo==="admin") pintaAdmin(res); else pintaResumen(res);
+    return;
+  }
+  panel.classList.remove("hidden"); res.classList.add("hidden");
+  construyePersona(panel);
+  pinta();
+}
+function pinta(){ refrescos.forEach(function(f){ try{f();}catch(e){} }); pintaTabs(); }
+
+function construyePersona(panel){
+  var p=fichaDe(actual), d=dd(actual);
+
+  if(soloLectura()){
+    var rb=el("div","ro-banner");
+    rb.appendChild(el("span",null,"Vista de administración, solo lectura. Evalúa: "+nombreEvaluador(p.evaluadorId)+
+      (meta[actual]? " · última actualización "+hace(meta[actual].updated) : " · aún sin respuestas")+"."));
+    rb.appendChild(boton("← Volver al consolidado","btn sm",function(){ actual="_res"; construye(); }));
+    panel.appendChild(rb);
+  }
+
+  /* perfil */
+  var c0=card(perfilVal(p,"nombre") || "Posición vacante", null, "Ficha del evaluado · la completa RR.HH.");
+  refrescos.push(function(){ c0.querySelector("h2").textContent = perfilVal(p,"nombre") || "Posición vacante"; });
+  var pg=el("div","pgrid");
+  function campoPerfil(clave,etiqueta,ancho,filas){
+    var w=el("div", ancho? "full":null);
+    var lb=document.createElement("label"); lb.textContent=etiqueta; w.appendChild(lb);
+    var inp = filas ? document.createElement("textarea") : document.createElement("input");
+    if(!filas) inp.type="text";
+    if(filas) inp.style.minHeight=(filas*26+26)+"px";
+    inp.placeholder="—";
+    inp.addEventListener("input",function(){
+      if(!editable(actual)) return;
+      d.perfil[clave]=inp.value; pinta(); guardar(actual);
+    });
+    w.appendChild(inp); pg.appendChild(w);
+    refrescos.push(function(){
+      if(document.activeElement!==inp) inp.value=perfilVal(p,clave);
+      inp.disabled=!editable(actual);
+    });
+  }
+  campoPerfil("cargo","Cargo",false,0);
+  campoPerfil("nombre","Ocupante del cargo",false,0);
+  campoPerfil("anios","Años siendo miembro del CE",false,0);
+  campoPerfil("prof","Profesión",false,0);
+  campoPerfil("estudios","Otros estudios",true,2);
+  campoPerfil("exper","Otras áreas de experticia distintas al área que opera actualmente",true,2);
+  c0.body.appendChild(pg);
+  panel.appendChild(c0);
+
+  /* A · objetivos */
+  var cA=card("Resultados objetivos","50%","Dato precargado por RR.HH.","A");
+  campoNumero(cA.body,"Cumplimiento de los objetivos del año fiscal 2025-2026",
+    "Sobre una base de "+BASE_OBJ+", donde 100 es la meta y "+BASE_OBJ+" el desempeño superior. Lo carga RR.HH. antes de la evaluación.",
+    "de "+BASE_OBJ,0,BASE_OBJ,0.01,function(){return d.objetivos;},function(v){d.objetivos=v;},true);
+  filaResultado(cA.body,"Resultado del bloque",function(){return bloques(actual).A;},"A");
+  panel.appendChild(cA);
+
+  /* B · estrategia */
+  var cB=card("Estrategia y ejecución","10%",null,"B");
+  ITEMS_B.forEach(function(it,k){ itemEscala(cB.body,it[0],it[1],function(){return d.b[k];},function(v){d.b[k]=v;}); });
+  filaResultado(cB.body,"Resultado del bloque",function(){return bloques(actual).B;},"B");
+  panel.appendChild(cB);
+
+  /* C · liderazgo y talento */
+  var cC=card("Liderazgo y Desarrollo de Talento","20%","Con insumo de RR.HH.","C");
+  ITEMS_C.forEach(function(it,k){ itemEscala(cC.body,it[0],it[1],function(){return d.c[k];},function(v){d.c[k]=v;}); });
+  cC.body.appendChild(el("div","note-inline","Datos de contexto. No se promedian: acompañan la calificación."));
+  campoNumero(cC.body,"% de posiciones críticas del área con sucesor identificado","","%",0,100,1,
+    function(){return d.critSuc;},function(v){d.critSuc=v;},true);
+  var ws=el("div","pre");
+  var lbs=el("div","lb","Sucesor para su propio cargo");
+  lbs.appendChild(botonNota("Campo · Sucesor para su propio cargo", ws));
+  ws.appendChild(lbs);
+  var sel=document.createElement("select"); sel.className="precargado";
+  var op0=el("option",null,"—"); op0.value=""; sel.appendChild(op0);
+  SUCESOR.forEach(function(o){ var op=el("option",null,o); op.value=o; sel.appendChild(op); });
+  sel.addEventListener("change",function(){ if(!editable(actual)) return; d.sucesor=sel.value; guardar(actual); });
+  ws.appendChild(sel); cC.body.appendChild(ws);
+  refrescos.push(function(){ sel.value=d.sucesor||""; sel.disabled=!editable(actual); });
+  filaResultado(cC.body,"Resultado del bloque",function(){return bloques(actual).C;},"C");
+  panel.appendChild(cC);
+
+  /* D · pares */
+  var cD=card("Colaboración con el Comité Ejecutivo","10%","Responden los pares del CE","D");
+  cD.body.appendChild(el("div","note-inline",
+    "Las cuatro preguntas que responde cada miembro del Comité sobre los demás, ancladas a Capacidad de Integración:"));
+  PREG_PARES.forEach(function(q,k){
+    var caja=el("div"), r=el("div","peerq");
+    r.appendChild(el("span",null,"P"+(k+1)));
+    var sp=el("span",null,q);
+    r.appendChild(sp); caja.appendChild(r);
+    sp.appendChild(botonNota("Pregunta de pares P"+(k+1)+" · "+q, caja));
+    cD.body.appendChild(caja);
+  });
+  campoNumero(cD.body,"Resultado que recibió de sus pares",
+    "Promedio de 1 a 5 descartando la calificación más alta y la más baja recibidas. Se toma del reporte de la encuesta. Si respondieron menos de 5 pares, dejar vacío.",
+    "de 5",1,5,0.01,function(){return d.pares;},function(v){d.pares=v;},true);
+  casillaNA(cD.body,"naPares","Este ejecutivo no recibió suficientes respuestas de sus pares. Marcar solo como excepción.");
+  filaResultado(cD.body,"Resultado del bloque",function(){return bloques(actual).D;},"D");
+  panel.appendChild(cD);
+
+  /* E · clima */
+  var cE=card("Clima Organizacional","10%","Dato precargado por RR.HH.","E");
+  campoNumero(cE.body,"Resultados medición ECO 26",
+    "Del área que lidera. Con menos de 5 personas se usa el ECO de la Dirección o VP superior. Si no existe un área por encima, dejar vacío.",
+    "%",0,100,0.1,function(){return d.clima;},function(v){d.clima=v;},true);
+  casillaNA(cE.body,"naClima","No existe medición de clima para esta posición ni un área por encima de la cual tomarla.");
+  filaResultado(cE.body,"Resultado del bloque",function(){return bloques(actual).E;},"E");
+  panel.appendChild(cE);
+
+  /* total */
+  var tot=el("div","total"), th=el("div","th"), tl=el("div");
+  tl.appendChild(el("div","tl","Resultado total"));
+  var tv=el("div","tv"); tl.appendChild(tv); th.appendChild(tl);
+  var pend=el("div"); pend.style.textAlign="right"; pend.style.opacity=".82"; pend.style.fontSize="12.5px";
+  th.appendChild(pend); tot.appendChild(th);
+  var bars=el("div","bars"), bh=el("div","bar");
+  ["Bloque","Peso","Resultado","Puntos"].forEach(function(x,i){ var s=el("span",["bn","bw","bv","bp"][i],x); s.style.color="var(--faint)"; s.style.fontWeight="700"; bh.appendChild(s); });
+  bh.style.fontSize="10.5px"; bh.style.letterSpacing=".08em"; bh.style.textTransform="uppercase";
+  bars.appendChild(bh);
+  ["A","B","C","D","E"].forEach(function(k){
+    var b=el("div","bar");
+    b.appendChild(el("span","bn",NOM_BLOQUE[k]));
+    var w=el("span","bw"), v=el("span","bv"), pz=el("span","bp");
+    b.appendChild(w); b.appendChild(v); b.appendChild(pz);
+    bars.appendChild(b);
+    refrescos.push(function(){
+      var x=bloques(actual)[k], e=pesosEfectivos(actual)[k], est=estadoBloque(actual,k);
+      w.textContent = (e===null? Math.round(PESOS[k]*100) : Math.round(e*1000)/10)+"%";
+      v.textContent = x===null? (est==="na"? "No aplica":"Sin responder") : pct(x);
+      v.className = x===null? "bv na":"bv";
+      pz.textContent = est==="na"? "—" : un(puntos(actual,k),1);
+      pz.className = est==="ok"? "bp":"bp na";
+      b.classList.toggle("redist", est==="na");
+    });
+  });
+  tot.appendChild(bars); panel.appendChild(tot);
+  refrescos.push(function(){
+    var t=total(actual), lista=completa(actual);
+    tv.textContent = t===null? "Sin datos aún" : (pct(t)+(lista? "" : " acumulado"));
+    tv.className = t===null? "tv pend":"tv";
+    var f=faltan(actual), pen=[];
+    for(var kk in PESOS) if(estadoBloque(actual,kk)==="pend") pen.push(kk);
+    pend.textContent = lista
+      ? "Evaluación completa · "+(NPREG-f)+" de "+NPREG+" preguntas calificadas"
+      : ("Resultado parcial · faltan "+pen.length+" bloque"+(pen.length===1?"":"s")+(f>0? " y "+f+" pregunta"+(f===1?"":"s") : ""));
+  });
+
+  /* sello de cierre */
+  var sello=el("div","sello"), txtSello=el("span"); sello.appendChild(txtSello);
+  var bCerrar=boton("Cerrar evaluación","btn pri"), bReabrir=boton("Reabrir","btn");
+  bCerrar.addEventListener("click",function(){
+    if(soloLectura() || cerrada(actual)) return;
+    if(faltan(actual)>0 && bCerrar.textContent.indexOf("Confirmar")<0){
+      bCerrar.textContent="Confirmar cierre con "+faltan(actual)+" preguntas sin responder"; return;
+    }
+    d.cerrada=true; d.cerradaPor=S.user.nombre; d.cerradaEn=new Date().toISOString();
+    guardar(actual); construye();
+  });
+  bReabrir.addEventListener("click",function(){
+    if(bReabrir.textContent.indexOf("Confirmar")<0){ bReabrir.textContent="Confirmar reapertura"; return; }
+    d.cerrada=false; d.cerradaPor=""; d.cerradaEn="";
+    if(soloLectura()){ sucio[actual]=true; respaldoLocal(); sync("saving","Guardando…"); envia(); construye(); }
+    else { guardar(actual); construye(); }
+  });
+  sello.appendChild(bCerrar); sello.appendChild(bReabrir);
+  panel.appendChild(sello);
+  panel.appendChild(el("div","aviso", soloLectura()
+    ? "Como administrador puede reabrir una evaluación cerrada para que su evaluador la corrija. La reapertura queda registrada en la Bitácora."
+    : "Al cerrar, las respuestas de esta persona quedan bloqueadas y se registra quién cerró y en qué momento. Cada cambio se guarda solo en Google Sheets."));
+  refrescos.push(function(){
+    var c=cerrada(actual);
+    sello.className = c ? "sello cerrada" : "sello";
+    bCerrar.classList.toggle("hidden", c || soloLectura());
+    bReabrir.classList.toggle("hidden", !c);
+    if(!c){
+      bCerrar.textContent="Cerrar evaluación";
+      txtSello.textContent = soloLectura() ? "Evaluación abierta. Su evaluador aún puede modificarla." : "Evaluación abierta. Las respuestas se pueden modificar.";
+    } else {
+      bReabrir.textContent="Reabrir";
+      txtSello.textContent="Evaluación cerrada"+selloTexto(actual)+".";
+    }
+  });
+
+  /* cierre de la conversación */
+  var cF=card("Cierre de la conversación",null,"No entra en el cálculo");
+  campoTexto(cF.body,"Capacidad actual del ocupante en el rol: comentarios y recomendaciones para mejorar el desempeño",
+    function(){return d.com;},function(v){d.com=v;});
+  campoTexto(cF.body,"Prioridades de desarrollo 2026-2027 acordadas",function(){return d.prior;},function(v){d.prior=v;});
+  campoTexto(cF.body,"Apoyo requerido del Presidente Ejecutivo o de VP RR.HH.",function(){return d.apoyo;},function(v){d.apoyo=v;});
+  panel.appendChild(cF);
+
+  /* navegación */
+  var lista=listaActual(), idx=-1;
+  lista.forEach(function(x,i){ if(x.id===actual) idx=i; });
+  var acts=el("div","actions");
+  acts.appendChild(boton(soloLectura()? "← Consolidado general" : "← Mi resumen","btn",function(){ actual="_res"; construye(); window.scrollTo({top:0}); }));
+  if(idx>0) acts.appendChild(boton("Anterior: "+(perfilVal(lista[idx-1],"nombre")||perfilVal(lista[idx-1],"cargo")),"btn",function(){ actual=lista[idx-1].id; construye(); window.scrollTo({top:0}); }));
+  if(idx>=0 && idx<lista.length-1) acts.appendChild(boton("Siguiente: "+(perfilVal(lista[idx+1],"nombre")||perfilVal(lista[idx+1],"cargo"))+" →","btn pri",function(){ actual=lista[idx+1].id; construye(); window.scrollTo({top:0}); }));
+  panel.appendChild(acts);
+}
+
+/* ============ textos de guía y pie ============ */
+function pintaGuia(){
+  var ol=$("guiatxt"); ol.textContent="";
+  var pasos = S.modo==="admin" ? [
+    "El <b>Consolidado general</b> muestra en vivo el avance de cada evaluador y el resultado de cada evaluado. Se actualiza solo cada pocos segundos.",
+    "Pulse cualquier fila para ver la evaluación completa en modo lectura. Desde ahí puede <b>reabrir</b> una evaluación cerrada.",
+    "<b>Exportar consolidado</b> descarga un archivo que abre en Excel con todas las respuestas, pregunta por pregunta. También puede exportar por evaluador.",
+    "Todo queda registrado en el Google Sheet: hoja <b>Respuestas</b> (una fila por evaluado) y hoja <b>Bitácora</b> (inicios, cierres y reaperturas).",
+    "Para cambiar quién evalúa a quién, edite la columna <b>evaluadorId</b> de la hoja <b>Evaluados</b>; para dar acceso, la hoja <b>Evaluadores</b>."
+  ] : [
+    "Arriba ve solo a las personas que le corresponde evaluar. Elija una y responda pulsando el número de 1 a 5. El resultado de cada bloque se calcula solo.",
+    "Las casillas con fondo crema vienen precargadas por Recursos Humanos.",
+    "<b>No hace falta guardar:</b> cada cambio se registra automáticamente en Google Sheets. Puede cerrar el navegador y continuar otro día, desde cualquier equipo.",
+    "Al terminar cada evaluación, pulse <b>Cerrar evaluación</b> al pie de la persona.",
+    "En <b>Mi resumen</b> puede exportar los resultados de todas sus personas evaluadas a Excel, o imprimirlos en PDF."
+  ];
+  pasos.forEach(function(h){ var li=el("li"); li.innerHTML=h; ol.appendChild(li); });
+  $("foot").textContent = api.demo
+    ? "Modo demostración: este portal está funcionando fuera de Google Apps Script, así que los datos se guardan solo en este navegador. Instalado en Apps Script, todo se guarda en el Google Sheet y lo ven en vivo el evaluador y el administrador."
+    : (S.modo==="admin"
+      ? "Usted ve todas las evaluaciones porque tiene rol de administrador. Los evaluadores solo ven a las personas que les corresponden."
+      : "Solo usted y el equipo de Desarrollo Organizacional ven estas respuestas. Cada cambio queda registrado con fecha y hora.");
+}
+
+/* ============ ingreso y arranque ============ */
+function muestra(cual){
+  $("cargando").classList.toggle("hidden",cual!=="cargando");
+  $("login").classList.toggle("hidden",cual!=="login");
+  $("app").classList.toggle("hidden",cual!=="app");
+}
+function arranca(codigo){
+  muestra("cargando");
+  api.bootstrap(codigo||"").then(function(r){
+    if(r && r.ok) return entra(codigo,r);
+    if(r && r.needLogin) return pideCodigo(r);
+    muestra("login"); $("loginst").textContent="No se pudo cargar el portal: "+((r&&r.error)||"error desconocido");
+  },function(e){
+    muestra("login"); $("loginst").textContent="No se pudo conectar con el servidor. "+(e&&e.message?e.message:"");
+  });
+}
+function pideCodigo(r){
+  muestra("login");
+  ls(CLAVE_COD,null);
+  $("loginmsg").textContent = r.email
+    ? "Su correo ("+r.email+") no está registrado como evaluador. Escriba el código de acceso que le envió Desarrollo Organizacional."
+    : "Escriba el código de acceso que le envió Desarrollo Organizacional.";
+  $("loginst").textContent = r.codigoInvalido ? "Ese código no es válido. Revíselo e intente de nuevo." : "";
+  var dl=$("demolist"); dl.textContent="";
+  if(r.demo && r.usuarios){
+    dl.classList.remove("hidden");
+    dl.appendChild(el("div","fl","Demostración · entrar como"));
+    r.usuarios.forEach(function(u){
+      var b=boton("","btn",function(){ arranca(u.codigo); });
+      var izq=el("span"); izq.appendChild(el("span",null,u.nombre+" ")); izq.appendChild(el("small",null,u.cargo));
+      b.appendChild(izq); b.appendChild(el("small",null,/ADMIN/.test(u.rol)?"ADMIN":u.codigo));
+      dl.appendChild(b);
+    });
+  }
+}
+function entra(codigo,r){
+  S.codigo=codigo||""; S.user=r.user; S.evaluadores=r.evaluadores||[]; S.evaluados=r.evaluados||[];
+  S.desde=r.now||Date.now(); S.ultimo=0;
+  datos={}; meta={}; sucio={}; enVuelo={};
+  for(var id in (r.respuestas||{})){
+    var x=r.respuestas[id];
+    datos[id]=normaliza(x.data); meta[id]={updated:x.updated,updatedBy:x.updatedBy};
+    if(x.updated>S.ultimo) S.ultimo=x.updated;
+  }
+  /* recupera cambios que no alcanzaron a subir */
+  var rec=0;
+  try{
+    var resp=JSON.parse(ls(CLAVE_RESPALDO+"-"+S.user.id)||"{}");
+    for(var k in resp){ if(fichaDe(k) && resp[k]){ datos[k]=normaliza(resp[k]); sucio[k]=true; rec++; } }
+  }catch(e){}
+  if(S.codigo) ls(CLAVE_COD,S.codigo);
+  var tieneMios=misEvaluados().length>0;
+  S.modo = (S.user.admin && !tieneMios) ? "admin" : "eval";
+  $("uname").textContent=S.user.nombre;
+  $("ucargo").textContent=S.user.cargo+(S.user.admin?" · Administrador":"");
+  $("modos").classList.toggle("hidden", !(S.user.admin && tieneMios));
+  $("salir").classList.toggle("hidden", !S.user.porCodigo);
+  $("demotag").classList.toggle("hidden", !api.demo);
+  actual = (S.modo==="eval" && misEvaluados().length===1) ? misEvaluados()[0].id : "_res";
+  aplicaModo();
+  muestra("app");
+  sync("ok",etiquetaOk());
+  if(rec){ sync("saving","Subiendo cambios que quedaron pendientes…"); envia(); }
+  programaPoll();
+}
+function aplicaModo(){
+  document.querySelectorAll("#modos button").forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-modo")===S.modo?"true":"false"); });
+  $("subtitulo").textContent = S.modo==="admin"
+    ? "Administración · resultados consolidados de todos los evaluadores"
+    : "Mis evaluaciones · "+misEvaluados().length+" persona"+(misEvaluados().length===1?"":"s")+" a evaluar";
+  pintaGuia();
+  construye();
+}
+function salir(msg){
+  clearTimeout(tPoll);
+  S.user=null; S.codigo=""; ls(CLAVE_COD,null);
+  pideCodigo({demo:api.demo, usuarios: api.demo? DEMO.evaluadores : null});
+  if(msg) $("loginst").textContent=msg;
+}
+
+document.querySelectorAll("#modos button").forEach(function(b){
+  b.addEventListener("click",function(){
+    var m=b.getAttribute("data-modo"); if(m===S.modo) return;
+    if(hayPendientes()) envia();
+    S.modo=m; actual="_res"; aplicaModo(); programaPoll(); window.scrollTo({top:0});
+  });
+});
+$("salir").addEventListener("click",function(){
+  if(hayPendientes()){ envia(); }
+  salir("");
+});
+$("entrar").addEventListener("click",function(){ arranca($("codigo").value); });
+$("codigo").addEventListener("keydown",function(e){ if(e.key==="Enter") arranca($("codigo").value); });
+
+arranca(ls(CLAVE_COD)||"");
+</script>
+</body>
+</html>
